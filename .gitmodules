@@ -1,9 +1,3 @@
 [submodule ".oh-my-zsh"]
 	path = .oh-my-zsh
 	url = https://github.com/ohmyzsh/ohmyzsh
-[submodule ".mozilla/firefox/default-release"]
-	path = .mozilla/firefox/default-release
-	url = https://github.com/Filip-Sutkowy/blurclean-firefox-theme
-[submodule "/home/auhon/.mozilla/firefox/nkvzst2u.default-release/chrome"]
-	path = /home/auhon/.mozilla/firefox/nkvzst2u.default-release/chrome
-	url = https://github.com/Filip-Sutkowy/blurclean-firefox-theme
