@@ -1,3 +1,6 @@
 [submodule ".oh-my-zsh"]
 	path = .oh-my-zsh
 	url = https://github.com/ohmyzsh/ohmyzsh
+[submodule "firefox-css-theme/chrome"]
+	path = firefox-css-theme/chrome
+	url = https://github.com/Filip-Sutkowy/blurclean-firefox-theme
