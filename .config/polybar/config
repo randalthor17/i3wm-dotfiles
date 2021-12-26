@@ -59,7 +59,7 @@ font-4 = Iosevka:style=Bold:fontformat=truetype:size=16:antialias=true;4
 
 modules-left = powermenu rofi i3 xwindow
 modules-center =
-modules-right = pulseaudio updates-pacman-aurhelper memory cpu eth date
+modules-right = pulseaudio memory cpu eth date
 
 tray-position = right
 tray-padding = 5
@@ -262,7 +262,7 @@ format-disconnected = %{T5}%{T-}
 
 [module/date]
 type = internal/date
-interval = 5
+interval = 1
 
 date = " %a %d-%m-%Y"
 date-alt = " %Y-%m-%d"
