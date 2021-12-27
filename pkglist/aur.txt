@@ -1,0 +1,4 @@
+arch-wiki-cli 0.4-2
+betterdiscord-installer-bin 1.1.1-2
+ttf-font-logos 0.17-1
+xfce-polkit 0.3-1
