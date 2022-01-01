@@ -115,3 +115,4 @@ export VISUAL='nano'
 
 # alias for organizing dotfiles
 alias dot='/usr/bin/git --git-dir=/home/auhon/.dotfiles --work-tree=/home/auhon'
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
