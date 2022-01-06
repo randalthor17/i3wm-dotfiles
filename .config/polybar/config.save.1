@@ -34,7 +34,7 @@ height = 27
 ;offset-x = 1%
 ;offset-y = 1%
 radius = 6.0
-fixed-center = true
+fixed-center = false
 
 background = ${colors.background}
 foreground = ${colors.foreground}
@@ -55,11 +55,11 @@ font-0 = Iosevka:style=Bold:fontformat=truetype:size=10:antialias=true;0
 font-1 = unifont::fontformat=truetype:size=8:antialias=false;1
 font-2 = siji:size=12:antialias=true;2
 font-3 = "font\-logos:size=12;3"
-font-4 = Iosevka:style=Bold:fontformat=truetype:size=16:antialias=true;4
+font-4 = Iosevka:style=Bold:fontformat=truetype:size=16R:antialias=true;4
 
 modules-left = powermenu rofi i3 xwindow
-modules-center = date
-modules-right = pulseaudio memory cpu eth
+modules-center =
+modules-right = pulseaudio updates-pacman-aurhelper memory cpu eth date
 
 tray-position = right
 tray-padding = 5
@@ -251,10 +251,10 @@ interval = 3.0
 
 ;format-connected-underline = #55aa55
 format-connected-prefix =
-format-connected-prefix-foreground = ${colors.foreground}
+format-connected-prefix-foreground = ${colors.foreground-alt}
 label-connected = %upspeed%  %downspeed%
 
-format-disconnected = %{T5}%{T-}
+format-disconnected =
 ;format-disconnected = <label-disconnected>
 ;format-disconnected-underline = ${self.format-connected-underline}
 ;label-disconnected = %ifname% disconnected
@@ -262,7 +262,7 @@ format-disconnected = %{T5}%{T-}
 
 [module/date]
 type = internal/date
-interval = 1
+interval = 5
 
 date = " %a %d-%m-%Y"
 date-alt = " %Y-%m-%d"
@@ -388,7 +388,7 @@ type = custom/menu
 
 expand-right = true
 
-format-spacing = 0
+format-spacing = 1
 
 label-open = ⏻
 label-open-font = 5
@@ -399,18 +399,25 @@ label-close-foreground = ${colors.secondary}
 label-separator = |
 label-separator-foreground = ${colors.foreground-alt}
 
-menu-0-0 = lock
-menu-0-0-exec = i3lock -i /usr/share/backgrounds/dragons-around-the-moon.png
-menu-0-1 = logout
-menu-0-1-exec = loginctl terminate-user $USER
-menu-0-2 = suspend
-menu-0-2-exec = systemctl suspend
-menu-0-3 = hibernate
-menu-0-3-exec = systemctl hibernate
-menu-0-4 = shutdown
-menu-0-4-exec = systemctl poweroff
-menu-0-5 = reboot
-menu-0-5-exec = systemctl reboot
+menu-0-0 = reboot
+menu-0-0-exec = menu-open-1
+menu-0-1 = power off
+menu-0-1-exec = menu-open-2
+
+menu-1-0 = cancel
+menu-1-0-exec = menu-open-0
+menu-1-1 = reboot
+menu-1-1-exec = sudo reboot
+
+menu-2-0 = power off
+menu-2-0-exec = sudo poweroff
+menu-2-1 = cancel
+menu-2-1-exec = menu-open-0
+
+[module/updates-pacman-aurhelper]
+type = custom/script
+exec = ~/polybar-scripts/updates-pacman-aurhelper/updates-pacman-aurhelper.sh
+interval = 600
 
 [module/rofi]
 type = custom/text
@@ -428,3 +435,5 @@ screenchange-reload = true
 [global/wm]
 margin-top = 5
 margin-bottom = 5
+
+; vim:ft=dosini

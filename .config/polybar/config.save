@@ -34,7 +34,7 @@ height = 27
 ;offset-x = 1%
 ;offset-y = 1%
 radius = 6.0
-fixed-center = true
+fixed-center = false
 
 background = ${colors.background}
 foreground = ${colors.foreground}
@@ -48,18 +48,16 @@ border-color = #00000000
 padding-left = 2
 padding-right = 2
 
-module-margin-left = 1
-module-margin-right = 1
+module-margin-left = 2
+module-margin-right = 2
 
-font-0 = Iosevka:style=Bold:fontformat=truetype:size=10:antialias=true;0
-font-1 = unifont::fontformat=truetype:size=8:antialias=false;1
-font-2 = siji:size=12:antialias=true;2
-font-3 = "font\-logos:size=12;3"
-font-4 = Iosevka:style=Bold:fontformat=truetype:size=16:antialias=true;4
+font-0 = Noto Sans:fontformat=truetype:size=10:antialias=true;0
+font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
+font-2 = siji:pixelsize=10;1
 
-modules-left = powermenu rofi i3 xwindow
-modules-center = date
-modules-right = pulseaudio memory cpu eth
+modules-left = powermenu i3
+modules-center =
+modules-right = pulseaudio updates-pacman-aurhelper memory cpu eth date
 
 tray-position = right
 tray-padding = 5
@@ -113,7 +111,7 @@ label-unmounted-foreground = ${colors.foreground-alt}
 
 [module/bspwm]
 type = internal/bspwm
-
+2
 label-focused = %index%
 label-focused-background = ${colors.background-alt}
 label-focused-underline= ${colors.primary}
@@ -209,16 +207,17 @@ card = intel_backlight
 [module/cpu]
 type = internal/cpu
 interval = 2
-format-prefix = ""
-format-prefix-foreground = ${colors.foreground}
+format-prefix = "CPU: "
+format-prefix-foreground = ${colors.foreground-alt}
 ;format-underline = #f90000
 label = %percentage:2%%
 
 [module/memory]
 type = internal/memory
 interval = 2
-format-prefix = ""
-format-prefix-foreground = ${colors.foreground}
+format-prefix = "Mem: "
+;format-prefix-font = 1
+format-prefix-foreground = ${colors.foreground-alt}
 ;format-underline = #4bffdc
 label = %percentage_used%%
 
@@ -251,10 +250,10 @@ interval = 3.0
 
 ;format-connected-underline = #55aa55
 format-connected-prefix =
-format-connected-prefix-foreground = ${colors.foreground}
-label-connected = %upspeed%  %downspeed%
+format-connected-prefix-foreground = ${colors.foreground-alt}
+label-connected = U:%upspeed%  D:%downspeed%
 
-format-disconnected = %{T5}%{T-}
+format-disconnected =
 ;format-disconnected = <label-disconnected>
 ;format-disconnected-underline = ${self.format-connected-underline}
 ;label-disconnected = %ifname% disconnected
@@ -262,7 +261,7 @@ format-disconnected = %{T5}%{T-}
 
 [module/date]
 type = internal/date
-interval = 1
+interval = 5
 
 date = " %a %d-%m-%Y"
 date-alt = " %Y-%m-%d"
@@ -280,11 +279,11 @@ label = %date% %time%
 type = internal/pulseaudio
 
 format-volume = <label-volume> <bar-volume>
-label-volume = 蓼 %percentage%%
+label-volume = VOL %percentage%%
 label-volume-foreground = ${root.foreground}
 
-label-muted = 遼
-label-muted-foreground = $(colors.foreground)
+label-muted = Muted
+label-muted-foreground = #666
 
 bar-volume-width = 10
 bar-volume-foreground-0 = #55aa55
@@ -388,34 +387,35 @@ type = custom/menu
 
 expand-right = true
 
-format-spacing = 0
+format-spacing = 1
 
-label-open = ⏻
-label-open-font = 5
+label-open = Exit
+;label-open-font = 1
 label-open-foreground = ${colors.secondary}
-label-close = ﰸ 
-label-close-font = 5
+label-close = X cancel
 label-close-foreground = ${colors.secondary}
 label-separator = |
 label-separator-foreground = ${colors.foreground-alt}
 
-menu-0-0 = lock
-menu-0-0-exec = i3lock -i /usr/share/backgrounds/dragons-around-the-moon.png
-menu-0-1 = logout
-menu-0-1-exec = loginctl terminate-user $USER
-menu-0-2 = suspend
-menu-0-2-exec = systemctl suspend
-menu-0-3 = hibernate
-menu-0-3-exec = systemctl hibernate
-menu-0-4 = shutdown
-menu-0-4-exec = systemctl poweroff
-menu-0-5 = reboot
-menu-0-5-exec = systemctl reboot
+menu-0-0 = reboot
+menu-0-0-exec = menu-open-1
+menu-0-1 = power off
+menu-0-1-exec = menu-open-2
 
-[module/rofi]
-type = custom/text
-content = %{T4}%{T-}
-click-left = exec rofi -modi drun,run -show drun -theme onedark
+menu-1-0 = cancel
+menu-1-0-exec = menu-open-0
+menu-1-1 = reboot
+menu-1-1-exec = sudo reboot
+
+menu-2-0 = power off
+menu-2-0-exec = sudo poweroff
+menu-2-1 = cancel
+menu-2-1-exec = menu-open-0
+
+[module/updates-pacman-aurhelper]
+type = custom/script
+exec = ~/polybar-scripts/updates-pacman-aurhelper/updates-pacman-aurhelper.sh
+interval = 600
 
 [settings]
 screenchange-reload = true
@@ -428,3 +428,5 @@ screenchange-reload = true
 [global/wm]
 margin-top = 5
 margin-bottom = 5
+
+; vim:ft=dosini
